@@ -1,0 +1,17 @@
+body{
+	background: url(../img/1.jpg);
+	color: white;
+}
+#wrap{
+	width:100%;
+	
+}
+.photo{
+	float: left;
+	width:240px;
+	margin-right:20px;
+}
+.album{
+	width: 1000px;
+	margin: auto;
+}

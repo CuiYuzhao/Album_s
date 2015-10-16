@@ -1,0 +1,101 @@
+package servlet;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import java.util.Iterator;
+import java.util.List;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+
+@WebServlet(urlPatterns = {"/UploadServlet"})
+public class UploadServlet extends HttpServlet {
+
+    @Override
+    public void destroy() {
+        super.destroy();
+    }
+
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        DiskFileItemFactory difactory = new DiskFileItemFactory();
+        difactory.setSizeThreshold(1024 * 1024);
+        String dir = this.getServletContext().getRealPath("");
+        int i = dir.indexOf("build");
+        dir = dir.substring(0, i);
+        System.out.println(dir);
+        File filedir = new File(dir + "web/Doc/filetemp");
+        if (!filedir.exists()) {
+            filedir.mkdir();
+        }
+        difactory.setRepository(filedir);
+        String userdir = dir + "web/Doc/files";
+        File fudir = new File(userdir);
+        if (!fudir.exists()) {
+            fudir.mkdir();
+        }
+        ServletFileUpload sfu = new ServletFileUpload(difactory);
+        List list = null;
+        try {
+            list = sfu.parseRequest(request);
+        } catch (FileUploadException e) {
+            e.printStackTrace();
+        }
+        for (Iterator it = list.iterator(); it.hasNext();) {
+            FileItem fi = (FileItem) it.next();
+            if (fi.isFormField()) {
+                System.out.println(fi.getFieldName());
+                System.out.println(fi.getString());
+            } else {
+                //由于客户端向服务器发送的文件是客户端的全路径，在这我们只需要文件名即可
+                String filename = fi.getName();
+                int index = filename.lastIndexOf("\\");
+                if (index != -1) {
+                    filename = filename.substring(index + 1);
+                }
+                //向服务器写出文件
+                InputStream in = fi.getInputStream();
+                System.out.println(fudir + "/" + filename);
+                FileOutputStream fos = new FileOutputStream(fudir + "/" + filename);
+                byte[] buf = new byte[1024];
+                int len = -1;
+                while ((len = in.read(buf)) != -1) {
+                    fos.write(buf, 0, len);
+                }
+                //关闭流
+                if (in != null) {
+                    try {
+                        in.close();
+                    } finally {
+                        if (fos != null) {
+                            fos.close();
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println("----doPost----");
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request, response);
+    }
+
+    @Override
+    public void init() throws ServletException {
+    }
+
+}

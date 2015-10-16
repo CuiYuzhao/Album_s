@@ -1,0 +1,112 @@
+#wrap{
+	width: 100%;
+	min-height:1080px;
+  	font-size: 18px;
+  	overflow: hidden;
+	background: url(../img/2.jpg);
+        filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
+        -moz-background-size:100% 100%;
+	background-size:100% 100%;
+	color: white;
+}
+a{
+	text-decoration: none;
+}
+a:hover{
+	text-decoration: none;
+}
+h1{
+	margin: 15px 0 15px 0;
+	font-size: 25px;
+	width: 630px;
+	text-align:center;
+  	margin: auto;
+  	margin-bottom: 20px;
+  	border: 2px solid;
+  	box-shadow: aliceblue;
+  	padding: 10px;
+}
+#welcome{
+	
+	margin: auto;
+	margin-top: 20px;
+}
+#rank{
+	width: 800px;
+	margin: auto;
+	overflow:hidden;
+	line-height: 35px;
+}
+#rank a{
+	color: white;
+	text-decoration: underline;
+}
+#rank a:hover{
+	color: #006dcc;
+}
+#rank h2{
+	margin-bottom: 20px;
+}
+#rank div{
+	width: 350px;
+	float:left;
+	margin: 20px;
+	
+}
+#nav{
+	width:500px;
+	margin: auto;
+}
+#nav a{
+	display:block;
+	margin-top: 10px;
+  	cursor: pointer;
+  	width: 90px;
+  	border: 1px solid;
+  	text-align: center;
+  	border-radius: 5px;
+  	background: #006dcc;
+  	color: white;
+  	border-color: #04c;
+  	float: left;
+  	font-size: 14px;
+  	width: 85px;
+  	height: 22px;
+  	line-height: 22px;
+  	margin: 0 10px 0 10px;
+  	margin-left: 15px;
+}
+#nav a:hover{
+	background: #08c;
+}
+
+#welcome a{
+	display:inline-block;
+	margin-top: 10px;
+  	cursor: pointer;
+  	width: 90px;
+  	border: 1px solid;
+  	text-align: center;
+  	border-radius: 5px;
+  	background: #006dcc;
+  	color: white;
+  	border-color: #04c;
+  	font-size: 14px;
+  	width: 85px;
+  	height: 22px;
+  	line-height: 22px;
+  	margin: 0 10px 0 10px;
+  	margin-left: 15px;
+}
+.album{
+	width:550px;
+	margin: auto;
+	overflow: hidden;
+	line-height: 40px;
+}
+.vc-count{
+	margin:0 !important;
+	margin-left:50px;
+	width: 350px !important;
+  	padding-left: 68px;
+}
